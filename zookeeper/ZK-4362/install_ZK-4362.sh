@@ -1,8 +1,8 @@
 #! /bin/bash
 
 # Uncomment and change if JAVA_HOME or mvn or java not detected
-PATH=$PATH:/home/dparikesit/.sdkman/candidates/java/current/bin:/home/dparikesit/.sdkman/candidates/maven/current/bin
-JAVA_HOME=/home/dparikesit/.sdkman/candidates/java/current
+# PATH=$PATH:/home/dparikesit/.sdkman/candidates/java/current/bin:/home/dparikesit/.sdkman/candidates/maven/current/bin
+# JAVA_HOME=/home/dparikesit/.sdkman/candidates/java/current
 
 script_dir=$( dirname -- "$( readlink -f -- "$0"; )"; )
 
