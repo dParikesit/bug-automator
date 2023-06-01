@@ -8,7 +8,11 @@
 ```
 chmod +x -R .
 ```
-3. Run the `all` script, for example
+3. Run the `all` script. `NOTE THAT SOME SCRIPTS REQUIRE sudo`
 ```
 ./cassandra/CASSANDRA-14803/all_CASSANDRA-14803.sh <cassandra absolute path>
+
+# or
+
+sudo ./zookeeper/ZK-3832/all_ZK-3832.sh <zookeeper absolute path>
 ```
