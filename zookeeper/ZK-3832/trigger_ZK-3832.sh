@@ -6,11 +6,9 @@ sudo ./bin/zkServer.sh start || exit
 
 (sleep 3; echo quit) | sudo ./bin/zkCli.sh -server 127.0.0.1:2183
 
-cat ./logs/*.out
-
 echo -e "////////////////////////////////////////////////\n"
 
-echo "Above are the server logs"
-echo "Notice that javax.net.ssl.SSLHandshakeException: Received fatal alert: handshake_failure is caused by the bug"
+echo "java.lang.IllegalArgumentException: Invalid type: 1"
+echo "This is caused by the bug where it can't detect any SAN that is not DNS or IP"
 
 echo -e "\n////////////////////////////////////////////////\n"
