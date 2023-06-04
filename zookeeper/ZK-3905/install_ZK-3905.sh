@@ -9,7 +9,9 @@ script_dir=$( dirname -- "$( readlink -f -- "$0"; )"; )
 cd "$1" || exit
 
 git stash
-git checkout tags/release-3.5.8
+git checkout tags/release-3.5.9
+
+cp $script_dir/AuthFailX509AuthenticationProvider.java ./zookeeper-server/src/main/java/org/apache/zookeeper/server/auth
 
 sudo rm -rf logs/ version-2/ ssl/
 
@@ -24,6 +26,8 @@ echo "ssl.trustStore.location=$1/ssl/truststore.jks" >> ./conf/zoo.cfg
 echo "ssl.trustStore.password=password" >> ./conf/zoo.cfg
 echo "ssl.keyStore.location=$1/ssl/keystore.jks" >> ./conf/zoo.cfg
 echo "ssl.keyStore.password=password" >> ./conf/zoo.cfg
+echo "authProvider.authfail=org.apache.zookeeper.server.auth.AuthFailX509AuthenticationProvider" >> ./conf/zoo.cfg
+echo "ssl.authProvider=authfail" >> ./conf/zoo.cfg
 
 mkdir ssl
 
