@@ -13,6 +13,11 @@ git checkout tags/release-3.5.8
 
 sudo rm -rf logs/ version-2/
 
+if [ -z "$2" ]
+  then
+    git apply "$2"
+fi
+
 cp $script_dir/assertion.patch .
 git apply ./assertion.patch || exit
 

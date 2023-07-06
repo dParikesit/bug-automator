@@ -13,6 +13,11 @@ git checkout tags/release-3.6.2
 
 sudo rm -rf logs/ version-2/
 
+if [ -z "$2" ]
+  then
+    git apply "$2"
+fi
+
 mvn clean install -DskipTests -Dmaven.test.skip=true -Dmaven.site.skip=true -Dmaven.javadoc.skip=true || exit
 chmod +x -R bin/
 
