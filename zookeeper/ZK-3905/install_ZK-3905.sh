@@ -15,9 +15,10 @@ cp $script_dir/AuthFailX509AuthenticationProvider.java ./zookeeper-server/src/ma
 
 sudo rm -rf logs/ version-2/ ssl/
 
-if [ -z "$2" ]
+if [ $# -eq 2 ]
   then
     git apply "$2" || exit 1
+    echo "Patch applied"
 fi
 
 mvn clean install -DskipTests -Dmaven.test.skip=true -Dmaven.site.skip=true -Dmaven.javadoc.skip=true || exit 1
