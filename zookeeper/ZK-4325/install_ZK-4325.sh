@@ -6,7 +6,7 @@
 
 script_dir=$( dirname -- "$( readlink -f -- "$0"; )"; )
 
-cd "$1" || exit
+cd "$1" || exit 1
 
 git stash
 git checkout tags/release-3.6.2
@@ -15,10 +15,10 @@ sudo rm -rf logs/ version-2/
 
 if [ -z "$2" ]
   then
-    git apply "$2"
+    git apply "$2" || exit 1
 fi
 
-mvn clean install -DskipTests -Dmaven.test.skip=true -Dmaven.site.skip=true -Dmaven.javadoc.skip=true || exit
+mvn clean install -DskipTests -Dmaven.test.skip=true -Dmaven.site.skip=true -Dmaven.javadoc.skip=true || exit 1
 chmod +x -R bin/
 
 cp $script_dir/zoo.cfg ./conf

@@ -6,7 +6,7 @@
 
 script_dir=$( dirname -- "$( readlink -f -- "$0"; )"; )
 
-cd "$1" || exit
+cd "$1" || exit 1
 
 git stash
 git checkout tags/release-3.5.8
@@ -15,13 +15,13 @@ sudo rm -rf logs/ version-2/
 
 if [ -z "$2" ]
   then
-    git apply "$2"
+    git apply "$2" || exit 1
 fi
 
 cp $script_dir/assertion.patch .
-git apply ./assertion.patch || exit
+git apply ./assertion.patch || exit 1
 
-mvn clean install -DskipTests -Dmaven.test.skip=true -Dmaven.site.skip=true -Dmaven.javadoc.skip=true || exit
+mvn clean install -DskipTests -Dmaven.test.skip=true -Dmaven.site.skip=true -Dmaven.javadoc.skip=true || exit 1
 chmod +x -R bin/
 
 cp $script_dir/zoo.cfg ./conf

@@ -6,7 +6,7 @@
 
 script_dir=$( dirname -- "$( readlink -f -- "$0"; )"; )
 
-cd "$1" || exit
+cd "$1" || exit 1
 
 git stash
 git checkout tags/release-3.6.1
@@ -15,10 +15,10 @@ sudo rm -rf logs/ version-2/ ssl/
 
 if [ -z "$2" ]
   then
-    git apply "$2"
+    git apply "$2" || exit 1
 fi
 
-mvn clean install -DskipTests -Dmaven.test.skip=true -Dmaven.site.skip=true -Dmaven.javadoc.skip=true || exit
+mvn clean install -DskipTests -Dmaven.test.skip=true -Dmaven.site.skip=true -Dmaven.javadoc.skip=true || exit 1
 chmod +x -R bin/
 
 cp $script_dir/zoo.cfg ./conf
@@ -32,11 +32,11 @@ echo "ssl.keyStore.password=password" >> ./conf/zoo.cfg
 
 mkdir ssl
 
-keytool -genkeypair -keyalg RSA -alias selfsigned2 -keystore $1/ssl/keystore.jks -storepass password -keypass password -validity 360 -keysize 2048 -dname "CN=127.0.0.1, OU=YourOrganizationUnit, O=YourOrganization, L=YourCity, S=YourState, C=YourCountry" -ext "SAN=EMAIL:test@example.com" || exit
+keytool -genkeypair -keyalg RSA -alias selfsigned2 -keystore $1/ssl/keystore.jks -storepass password -keypass password -validity 360 -keysize 2048 -dname "CN=127.0.0.1, OU=YourOrganizationUnit, O=YourOrganization, L=YourCity, S=YourState, C=YourCountry" -ext "SAN=EMAIL:test@example.com" || exit 1
 
-echo password | keytool -export -alias selfsigned2 -keystore $1/ssl/keystore.jks -rfc -file ./ssl/selfsigned.cer || exit
+echo password | keytool -export -alias selfsigned2 -keystore $1/ssl/keystore.jks -rfc -file ./ssl/selfsigned.cer || exit 1
 
-echo yes | keytool -importcert -alias selfsigned2 -file $1/ssl/selfsigned.cer -keystore ./ssl/truststore.jks -storepass password || exit
+echo yes | keytool -importcert -alias selfsigned2 -file $1/ssl/selfsigned.cer -keystore ./ssl/truststore.jks -storepass password || exit 1
 
 sed -i "1 a JAVA_HOME=$JAVA_HOME" ./bin/zkEnv.sh
 
