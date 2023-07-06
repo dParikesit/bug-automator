@@ -4,4 +4,4 @@
 
 "$( dirname -- "$( readlink -f -- "$0"; )"; )/install_ZK-4362.sh" "$1" "$2" || exit
 "$( dirname -- "$( readlink -f -- "$0"; )"; )/trigger_ZK-4362.sh" "$1" || exit
-"$( dirname -- "$( readlink -f -- "$0"; )"; )/kill.sh" "$1" || exit
+"$( dirname -- "$( readlink -f -- "$0"; )"; )/kill.sh" "$1" "$2" || exit

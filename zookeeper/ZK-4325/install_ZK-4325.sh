@@ -6,6 +6,8 @@
 
 script_dir=$( dirname -- "$( readlink -f -- "$0"; )"; )
 
+sudo chown -R $(id -u):$(id -g) "$1"
+
 cd "$1" || exit 1
 
 git stash
