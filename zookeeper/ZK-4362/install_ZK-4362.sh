@@ -13,7 +13,7 @@ git checkout tags/release-3.6.3
 
 sudo rm -rf logs/ version-2/
 
-if [ $# -eq 2 ]
+if [ $# -eq 3 ]
   then
     git apply "$2" || exit 1
     echo "Patch applied"

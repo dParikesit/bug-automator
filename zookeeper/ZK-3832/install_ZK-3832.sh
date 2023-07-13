@@ -9,11 +9,11 @@ script_dir=$( dirname -- "$( readlink -f -- "$0"; )"; )
 cd "$1" || exit 1
 
 git stash
-git checkout tags/release-3.6.1
+git checkout tags/release-3.5.8
 
 sudo rm -rf logs/ version-2/ ssl/
 
-if [ $# -eq 2 ]
+if [ $# -eq 3 ]
   then
     git apply "$2" || exit 1
     echo "Patch applied"
